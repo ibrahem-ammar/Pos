@@ -227,25 +227,7 @@
                 bsCustomFileInput.init();
             //   CKEDITOR.config.language = "{{ app()->getLocale() }}";
                 $('.btn_delete').click(function(e){
-                    let that = $(this);
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                        }).then((result) => {
-                        if (result.isConfirmed) {
-                            that.closest('form').submit();
-                            Swal.fire(
-                            'Deleted!',
-                            'data has been deleted.',
-                            'success'
-                            )
-                        }
-                    });
+                    
 
                 });
             });

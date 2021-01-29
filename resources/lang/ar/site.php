@@ -7,6 +7,8 @@ return [
     'permissions' => 'الصلاحيات',
     'categories' => 'الاقسام',
     'products' => 'المنتجات',
+    'clients' => 'العملاء',
+    'orders' => 'الطلبات',
 
     'nodata' => 'لا تتوفر اي سجلات',
 
@@ -14,6 +16,8 @@ return [
     'permission' => 'صلاحية',
     'category' => 'قسم',
     'product' => 'منتج',
+    'client' => 'عميل',
+    'order' => 'طلب',
 
     'first_name' => 'الاسم الاول',
     'last_name' => 'الاسم الاخير',
@@ -49,6 +53,10 @@ return [
     'purchase_price' => 'سعر الشراء',
     'sale_price' => 'سعر البيع',
     'stock' => 'المخزن',
+
+    'quantity' => 'الكمية',
+    'price' => 'السعر',
+    'add_order' => 'اضف طلب'
 
 
 ];

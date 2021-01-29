@@ -17,10 +17,16 @@ class ProductController extends Controller
         $this->middleware(['permission:delete_products'])->only('destroy');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate();
-        return view('dashboard.products.index',compact('products'));
+        $categories = Category::all();
+        $products = Product::when($request->search,function($q) use ($request){
+            return $q->whereTranslationLike('name','%'.$request->search.'%')
+            ->orWhereTranslationLike('description','%'.$request->search.'%');
+        })->when($request->category_id,function($query) use ($request){
+            return $query->where('category_id',$request->category_id);
+        })->latest()->paginate(5);;
+        return view('dashboard.products.index',compact('products','categories'));
     }
 
     public function create()

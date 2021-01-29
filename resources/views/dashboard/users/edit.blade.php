@@ -29,7 +29,7 @@
         <label for="email">@lang('site.email')</label>
         <input type="email" class="form-control" value="{{ old('email',$user->email) }}" id="email" placeholder="@lang('site.email')" name="email">
     </div>
-    <?php   $models = ['users','categories','products'];
+    <?php   $models = ['users','categories','products','clients','orders'];
             $crud = ['create','read','update','delete']; ?>
     <div class="form-group">
         <label>@lang('site.permissions')</label>

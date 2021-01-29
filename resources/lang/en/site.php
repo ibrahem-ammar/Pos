@@ -5,8 +5,10 @@ return [
     'dashboard' => 'dashboard',
     'users' => 'users',
     'permissions' => 'permissions',
-    'categories' => 'categoriea',
+    'categories' => 'categories',
     'products' => 'products',
+    'clients' => 'clients',
+    'orders' => 'orders',
 
     'nodata' => 'no data yet',
 
@@ -14,16 +16,14 @@ return [
     'permission' => 'permission',
     'category' => 'category',
     'product' => 'product',
+    'client' => 'client',
+    'order' => 'order',
 
     'first_name' =>'first name',
     'last_name' =>'last name',
     'email' =>'email',
     'password' => 'password',
     'password_confirmation' => 'confirm password',
-
-    'permissions' => 'permissions',
-    'categories' => 'categories',
-    'products' => 'products',
 
     'create' => 'create',
     'add' => 'add',
@@ -49,6 +49,11 @@ return [
     'purchase_price' => 'purchase price',
     'sale_price' => 'sale price',
     'stock' => 'stock',
+
+    'quantity' => 'quantity',
+    'price' => 'price',
+    'add_order' => 'add order',
+
 ];
 
 ?>

@@ -58,6 +58,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{auth()->user()->hasPermission('read_orders') ? route('dashboard.orders.index') : '#' }}" class="nav-link {{auth()->user()->hasPermission('orders') ? '' : 'disabled' }}">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p class="text-capitalize">@lang('site.orders')</p>
+                </a>
+            </li>
+
 
         </ul>
         </nav>

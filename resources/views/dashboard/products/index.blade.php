@@ -22,10 +22,19 @@
                     @lang('site.product')
                 </a>
                 <div class="card-tools">
-                    <form role="form" action="" method="get">
+                    <form role="form" action="{{ route('dashboard.products.index') }}" method="get">
                         @csrf
-                        <div class="input-group input-group-sm" style="width: 150px;">
+                        <div class="input-group input-group-sm" style="width: 300px;">
+
                             <input type="text" name="search" class="form-control float-right" placeholder="@lang('site.search')" value="{{ request()->search }}">
+                            <select name="category_id" class="form-control">
+                                <option value="">categories</option>
+                                @forelse ($categories as $category)
+                                <option value="{{$category->id}}" {{request()->category_id == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                @empty
+                                <option value="">no categories</option>
+                                @endforelse
+                            </select>
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                             </div>
@@ -41,6 +50,7 @@
                         <th>#</th>
                         <th>@lang('site.name')</th>
                         <th>@lang('site.description')</th>
+                        <th>@lang('site.category')</th>
                         {{-- <th>@lang('site.image')</th> --}}
                         <th>@lang('site.purchase_price')</th>
                         <th>@lang('site.sale_price')</th>
@@ -55,6 +65,7 @@
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{!! $product->description !!}</td>
+                        <td>{{ $product->category->name }}</td>
                         {{-- <td>{{ $product->image }}</td> --}}
                         <td>{{ $product->purchase_price }}</td>
                         <td>{{ $product->sale_price }}</td>
@@ -70,10 +81,10 @@
                             <form method="post" action="{{ route('dashboard.products.destroy', ['product'=>$product->id]) }}" class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash mx-1"></i>@lang('site.delete')</button>
+                                <button type="button" class="btn btn-danger btn-sm btn_delete"><i class="fa fa-trash mx-1"></i>@lang('site.delete')</button>
                             </form>
                             @else
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash mx-1"></i>@lang('site.delete')</button>
+                            <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash mx-1"></i>@lang('site.delete')</button>
                             @endif
 
                         </td>

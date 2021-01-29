@@ -39,13 +39,15 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|unique:users,email',
-            'image' => 'image',
+            // 'image' => 'image',
             'password' => 'required|confirmed',
         ]);
 
         $user_data =$request->except(['password','password_confirmation','permissions','image']);
 
         $user_data['password'] = bcrypt($request->password);
+
+        // dd($request->permissions);
 
         // Image::make($request->image)->resize(300, null, function ($constraint) {
         //     $constraint->aspectRatio();
