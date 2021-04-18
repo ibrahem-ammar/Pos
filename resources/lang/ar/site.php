@@ -37,14 +37,18 @@ return [
     'delete' => 'حذف',
     'search' => 'بحث',
     'action' => 'الاكشن',
+    'show' => 'عرض',
+    'print' => 'طباعة',
 
     'added_seccessfully' => 'تم اضافة البيانات بنجاح',
     'updated_seccessfully' => 'تم تعديل البيانات بنجاح',
     'deleted_seccessfully' => 'تم حذف البيانات بنجاح',
 
-    'name' => 'عنوان',
+    'name' => 'الاسم',
     'image' => 'صورة',
     'Choose_file' => 'اختر ملف',
+    'phone' => 'رقم الهاتف',
+    'address' => 'العنوان',
 
     'ar' => 'اللغة العربية',
     'en' => 'اللغة الانجليزية',
@@ -53,10 +57,19 @@ return [
     'purchase_price' => 'سعر الشراء',
     'sale_price' => 'سعر البيع',
     'stock' => 'المخزن',
+    'profit_percent' => 'نسبة الفائدة',
 
+    'product_name' => 'اسم المنتج',
     'quantity' => 'الكمية',
     'price' => 'السعر',
-    'add_order' => 'اضف طلب'
+    'add_order' => 'اضف طلب',
+
+    'client_name' => 'اسم العميل',
+    'created_at' => 'تاريخ الاضافة',
+
+    'total' => 'المجموع',
+
+    'edit_order' => 'تعديل الطلب',
 
 
 ];

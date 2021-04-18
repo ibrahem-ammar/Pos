@@ -94,9 +94,7 @@
                         <th colspan="7">@lang('site.nodata')</th>
                     </tr>
                     @endforelse
-                    <tr>
-                        <td colspan="7">{{ $products->appends(request()->query())->links() }}</td>
-                    </tr>
+                    {{ $products->appends(request()->query())->links() }}
                 </tbody>
             </table>
 

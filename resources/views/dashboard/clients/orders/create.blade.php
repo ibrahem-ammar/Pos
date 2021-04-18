@@ -104,7 +104,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('dashboard.orders.store', ['client'=>$client]) }}" method="post">
                         @csrf
                         <table class="table table-hover text-nowrap">
                             <thead>
@@ -121,7 +121,7 @@
                           <h4>total : <span class="total">0</span></h4>
                       </div>
                       <div class="form-group">
-                          <button type="submit" class="btn btn-info"><i class="fa fa-plus"></i> @lang('site.add_order')</button>
+                          <button type="submit" class="btn btn-info disabled submit"><i class="fa fa-plus"></i> @lang('site.add_order')</button>
                       </div>
                     </form>
                 </div>
@@ -144,7 +144,7 @@
             let html = `
             <tr>
                 <td>${name}</td>
-                <td><input type="number" value="1" max="${stock}" min="1" name="qunatities[]" class="form-control quantity"></td>
+                <td><input type="number" value="1" max="${stock}" min="1" name="quantity[${id}]" class="form-control quantity"></td>
                 <td class="price" data-price="${salePrice}">${salePrice}</td>
                 <td><a href="javascript:void(0)" class="btn btn-danger delete_product" data-id="${id}"><i class="fa fa-trash"></i></a></td>
             </tr>
@@ -166,7 +166,7 @@
         $('body').on('change keyup blur','.quantity',function(){
             let priceField = $(this).closest('tr').find('.price');
             // console.log();
-            priceField.html(parseInt($(this).val()*priceField.data('price')));
+            priceField.html(parseFloat($(this).val()*priceField.data('price')));
             totalPrice();
         });
 
@@ -179,9 +179,11 @@
         function totalPrice(){
             price = 0;
             $('.price').each(function(){
-                price += parseInt($(this).html());
+                price += parseFloat($(this).html());
             });
+            console.log(price);
             $('.total').html(price);
+            price==0? $('.submit').addClass('disabled') : $('.submit').removeClass('disabled') ;
         }
 
     });

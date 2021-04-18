@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,9 +17,14 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $orders = Order::whereHas('client',function ($q) use ($request)
+        {
+            return $q->where('name','like','%' . $request->search . '%');
+        })->paginate(10);
+
+        return view('dashboard.orders.index',compact('orders'));
     }
 
     /**
@@ -25,8 +32,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Client $client)
+    public function create(Request $request)
     {
+        $client = $request->client;
         $categories = Category::with('products')->get();
         return view('dashboard.clients.orders.create',compact('client','categories'));
     }
@@ -39,7 +47,34 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'quantity' => 'required|array',
+            'client' => 'required'
+        ]);
+
+        $client = Client::find($request->client);
+
+        $order = $client->orders()->create(['price'=>0]);
+
+        $total_price = 0 ;
+
+
+        foreach ($request->quantity as $product_id => $quantity) {
+
+            $product = Product::findOrFail($product_id);
+
+            $total_price += $product->sale_price * $quantity;
+
+            $order->products()->attach($product_id,['quantity'=>$quantity]);
+
+            $product->update([
+                'stock' => $product->stock - $quantity
+            ]);
+
+        }
+
+        $order->update(['price'=>$total_price]);
     }
 
     /**
@@ -50,7 +85,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        // dd($order);
+
+        // $products = $order->products;
+        return view('dashboard.orders._products',compact('order'));
     }
 
     /**
@@ -59,9 +97,11 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order,Client $client)
+    public function edit(Request $request,Order $order)
     {
-        //
+        $client = $request->client;
+        $categories = Category::with('products')->get();
+        return view('dashboard.clients.orders.edit',compact('client','categories','order'));
     }
 
     /**
@@ -71,9 +111,36 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order,Client $client)
+    public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            'quantity' => 'required|array',
+            'client' => 'required'
+        ]);
+
+        $client = Client::find($request->client);
+
+
+        $order->products()->detach();
+
+        $total_price = 0 ;
+
+
+        foreach ($request->quantity as $product_id => $quantity) {
+
+            $product = Product::findOrFail($product_id);
+
+            $total_price += $product->sale_price * $quantity;
+
+            $order->products()->attach($product_id,['quantity'=>$quantity]);
+
+            $product->update([
+                'stock' => $product->stock - $quantity
+            ]);
+
+        }
+
+        $order->update(['price'=>$total_price]);
     }
 
     /**
@@ -82,8 +149,16 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order,Client $client)
+    public function destroy(Order $order)
     {
-        //
+        // dd($order->products()->first()->pivot->quantity);
+        foreach ($order->products as $product) {
+            $stock = $product->stock + $product->pivot->quantity;
+            $product->update([
+                'stock'=> $stock
+            ]);
+        }
+
+        $order->delete();
     }
 }

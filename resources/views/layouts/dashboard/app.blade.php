@@ -9,12 +9,19 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        @if (LaravelLocalization::getCurrentLocaleDirection()=='ltr')
+            <!-- Theme style -->
+            <link rel="stylesheet" href=" {{ asset('admin_files/dist/css/adminlte.min.css') }} ">
+        @else
+            <!-- Theme style -->
+            <link rel="stylesheet" href=" {{ asset('admin_files/dist/css/adminrtl.min.css') }} ">
+        @endif
+
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href=" {{ asset('admin_files/plugins/fontawesome-free/css/all.min.css') }} ">
-        <!-- Theme style -->
-        <link rel="stylesheet" href=" {{ asset('admin_files/dist/css/adminlte.min.css') }} ">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        @yield('style')
     </head>
     <body class="hold-transition sidebar-mini">
         <div class="wrapper">
@@ -227,7 +234,7 @@
                 bsCustomFileInput.init();
             //   CKEDITOR.config.language = "{{ app()->getLocale() }}";
                 $('.btn_delete').click(function(e){
-                    
+
 
                 });
             });

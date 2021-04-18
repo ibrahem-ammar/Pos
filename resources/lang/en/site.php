@@ -33,14 +33,18 @@ return [
     'delete' => 'delete',
     'action' =>'action',
     'search' => 'search',
+    'show' => 'show',
+    'print' => 'print',
 
     'added_seccessfully' => 'data added seccessfully',
     'updated_seccessfully' => 'data updated seccessfully',
     'deleted_seccessfully' => 'data deleted seccessfully',
 
-    'name' => 'title' ,
+    'name' => 'name' ,
     'image' => 'image',
     'Choose_file' => 'Choose file',
+    'phone' => 'phone number',
+    'address' => 'address',
 
     'ar' => 'arabic',
     'en' => 'english',
@@ -49,10 +53,20 @@ return [
     'purchase_price' => 'purchase price',
     'sale_price' => 'sale price',
     'stock' => 'stock',
+    'profit_percent' => 'profit percent',
 
+    'product_name' => 'product name',
     'quantity' => 'quantity',
     'price' => 'price',
     'add_order' => 'add order',
+
+    'client_name' => 'client name',
+    'created_at' => 'added at',
+
+    'total' => 'total',
+
+    'edit_order' => 'edit order',
+
 
 ];
 

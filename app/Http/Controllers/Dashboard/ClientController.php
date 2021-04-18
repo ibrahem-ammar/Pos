@@ -16,6 +16,7 @@ class ClientController extends Controller
                         ->orwhereLike('phone','%'.$request->search.'%')
                         ->orwhereLike('address','%'.$request->search.'%');
         })->latest()->paginate(5);
+        // dd($clients->first()->id);
         return view('dashboard.clients.index',compact('clients'));
     }
 

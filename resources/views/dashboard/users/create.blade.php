@@ -43,7 +43,7 @@
         <input type="password" class="form-control" value="{{ old('password_confirmation') }}" id="password_confirmation" placeholder="@lang('site.password_confirmation')" name="password_confirmation">
     </div>
     <?php   $models = ['users','categories','products','clients','orders'];
-            $crud = ['create','read','edit','delete']; ?>
+            $crud = ['create','read','update','delete']; ?>
     <div class="form-group">
         <label>@lang('site.permissions')</label>
         <div class="card card-primary card-outline card-outline-tabs">
