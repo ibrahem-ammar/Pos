@@ -1,4 +1,4 @@
-<table class="table table-hover text-nowrap">
+<table class="table table-hover text-nowrap order-products">
     <thead>
         <th>@lang('site.product_name')</th>
         <th>@lang('site.quantity')</th>
@@ -16,4 +16,4 @@
     </tbody>
 </table>
 <h4>@lang('site.total') : <span>{{ number_format($order->price,2) }}</span></h4>
-<button type="button" class="btn btn-primary d-block w-100 .print"><i class="fa fa-print"></i> @lang('site.print')</button>
+<button type="button" class="btn btn-primary d-block w-100 print"><i class="fa fa-print"></i> @lang('site.print')</button>

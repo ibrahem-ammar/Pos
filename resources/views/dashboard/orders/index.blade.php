@@ -152,7 +152,9 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('printThis/printThis.js') }}"></script>
     <script>
+        //list all order products
         $(document).ready(function () {
             $('.show-products').on('click',function() {
                 // console.log($(this).data('url'))
@@ -173,9 +175,9 @@
                     }
                 });
             });
-
-            $('.print').on('click',function () {
-                $('.table').printThis();
+            //print all products
+            $(document).on('click','.print',function () {
+                $('table.order-products').printThis();
             });
         });
     </script>
